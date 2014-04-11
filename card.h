@@ -6,4 +6,5 @@
 		int card_hp;
 		int card_mana;
 	}card_t;
+	int attack (card_t *attacker, card_t *defender);
 #endif

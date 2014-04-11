@@ -9,11 +9,11 @@ int attack (card_t *attacker, card_t *defender){
 		return 0;
 		//both cards are dead
 	}
-	if (defender -> card_hp < 0 && attacker -> card_hp > 0){
+	if (defender -> card_hp <= 0 && attacker -> card_hp > 0){
 		return 1;
 		//attacker wins
 	}
-	if (defender -> card_hp > 0 && attacker -> card_hp < 0){
+	if (defender -> card_hp > 0 && attacker -> card_hp <= 0){
 		return 2;
 		//defender wins
 	}
@@ -24,7 +24,7 @@ int attack (card_t *attacker, card_t *defender){
 }
 
 int main(){
-	card_t attacker = {"Green card",400, 30, 20};
+	card_t attacker = {"Green card",400, 300, 20};
 	card_t defender = {"Yellow card", 30, 40, 20};
 	 
 	
