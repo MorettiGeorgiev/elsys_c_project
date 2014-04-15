@@ -4,6 +4,5 @@
         typedef struct{
         int max_mana;
         int current_mana;
-        
     }manapool_t;
 #endif	/* MANAPOOL_H */
