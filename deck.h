@@ -9,7 +9,6 @@ struct hand_t {
     int hand_card_hp;
     int hand_card_mana;
 };
-
 struct deck_t {
     int top;
     card_t deck [DECK_SIZE];
