@@ -1,11 +1,16 @@
 #include<stdio.h>
 #include "manapool.h"
 
-void can_put_card(card_t card_to_put, manapool_t *pool) {
+int can_put_card(card_t card_to_put, manapool_t *pool) {
 
     pool->current_mana = 1;
     pool->current_mana = pool->max_mana - card_to_put.card_mana;
-    pool->current_mana >= 0 ? printf("You can summon the card\n") : printf("Not enough mana to summon the card");
+    if(pool->current_mana >= 0 ){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 void add_mana(manapool_t *pool, int mana_to_add) {
@@ -40,6 +45,11 @@ int main() {
             break;
         default: printf("An error occured");
     }
-    can_put_card(attacker, &pool);
+    if(can_put_card(attacker ,&pool) == 1){
+        printf("You have enough mana to put the card");
+    }
+    else{
+        printf("You DON'T have enough mana to put the card");
+    }
     return 0;
 }
