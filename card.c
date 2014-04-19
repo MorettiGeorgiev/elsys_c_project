@@ -1,31 +1,28 @@
 #include <stdio.h>
 #include "card.h"
 
-int attack (card_t *attacker, card_t *defender){
-	attacker -> card_hp -= defender -> card_damage;
-	defender -> card_hp -= attacker -> card_damage;
-	
-	if (defender -> card_hp <= 0 && attacker -> card_hp <= 0){
+int attack (card_t *attacker, card_t *defender){	
+	if(attacker -> card_dmg >= defender -> card_hp && defender -> card_dmg >= attacker -> card_hp  ){
 		return 0;
-		//both cards are dead
+		//Both cards are dead
 	}
-	if (defender -> card_hp <= 0 && attacker -> card_hp > 0){
+	if(attacker -> card_dmg >= defender -> card_hp && defender -> card_dmg < attacker -> card_hp){
 		return 1;
-		//attacker wins
+		//Attacker wins
 	}
-	if (defender -> card_hp > 0 && attacker -> card_hp <= 0){
+	if(attacker -> card_dmg < defender -> card_hp && defender -> card_dmg >= attacker -> card_hp){
 		return 2;
-		//defender wins
+		//Defender wins
 	}
-	if (defender -> card_hp > 0 && attacker -> card_hp > 0){
+	if(attacker -> card_dmg < defender -> card_hp && defender -> card_dmg < attacker -> card_hp){
 		return 3;
-		//both cards are alive
+		//Both cards are alive
 	}
 }
 
 int main(){
-	card_t attacker = {"Green card",400, 300, 20};
-	card_t defender = {"Yellow card", 30, 40, 20};
+	card_t attacker = {"Powerful card",40, 3000, 20};
+	card_t defender = {"Weak card", 320, 400, 20};
 	 
 	
 	if (attack(&attacker, &defender) == 0){ 
