@@ -1,2 +1,1 @@
-elsys_c_project
-===============
+Elsys Card Wars
