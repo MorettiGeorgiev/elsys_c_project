@@ -21,4 +21,8 @@ int attack (card_t *attacker, card_t *defender){
 		return 3;
 		//both cards are alive
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> aec926401fb256ece5ac4cac5685bf79fe76fc77
