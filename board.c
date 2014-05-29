@@ -62,62 +62,92 @@ void print_board(board_t *board, player_t *player, int player_id, int turn) {
     }
     printf(" #\n\n");
     if (player_id == 2) {
-            
+
         print_hand(&player->player_hand, &player->player_deck);
         print_player(player, turn);
     }
-    
+
 
 }
-/*
-void can_play_card(player_t *player,board_t *board, int card, int turn){
-    print_player(player, turn);
-    print_hand(&player->player_hand, &player->player_deck);
-    printf("\n");
-    if(board->lane1 == 0){
-        board->lane1 = 1;
-    }
- */
-/*
-    else if(board->lane2 == 0){
-        board->lane2_card = player->player_hand.hand_cards[card];
-        board->lane2 = 1;
-    }
-    else if(board->lane3 == 0){
-        board->lane3_card = player->player_hand.hand_cards[card];
-        board->lane3 = 1;
-    }
-    else if(board->lane4 == 0){
-        board->lane4_card = player->player_hand.hand_cards[card];
-        board->lane4 = 1;
-    }
-    else if(board->lane5 == 0){
-       board->lane4_card = player->player_hand.hand_cards[card];
-        board->lane4 = 1;
-    }
- * }
- */
 
-
-/*
-int can_play_card(card_t card_to_put, board_t *board, player_t *player, int card) {
-    int save_current_mana = player->player_mana.current_mana;
-    if (can_put_card(card_to_put, &player->player_mana)) {
-        return 1;
-    } 
-
-    else {
-        return 0;
-        player->player_mana.current_mana = save_current_mana;
+void play(board_t *player_to_play_board, board_t *other_player_board, player_t *player_to_play, player_t *other_player, cards_flag_t *flag,int turn) {
+    int card_to_attack;
+    int what_to_do;
+    int which_card_to_play;
+    int save_current_mana;
+    //print_board(player_to_play_board, player_to_play, 1, turn);
+    //print_board(other_player_board, other_player, 2, turn);
+    printf("\nWhat do you want to do?\n");
+    printf("1: Play card\n");
+    printf("2: Attack\n");
+    printf("3:Skip move\n");
+    printf("Your option: ");
+    scanf("%d", &what_to_do);
+    switch (what_to_do) {
+        case 1:
+            printf("Chose a card: ");
+            scanf("%d", &which_card_to_play);
+            if (player_to_play_board->lane1 == 0) {
+                save_current_mana = player_to_play->player_mana.current_mana;
+                if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {
+                    player_to_play->player_mana.current_mana = save_current_mana;
+                    play_card_from_hand(player_to_play, which_card_to_play);
+                    player_to_play_board->lane1_card = player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top];
+                    player_to_play_board->lane1 = 1;
+                    --player_to_play->player_hand.hand_top;
+                } else {
+                    printf("No mana to summon the card");
+                }
+            } else if (player_to_play_board->lane2 == 0) {
+                save_current_mana = player_to_play->player_mana.current_mana;
+                save_current_mana = player_to_play->player_mana.current_mana;
+                if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {
+                    player_to_play->player_mana.current_mana = save_current_mana;
+                    play_card_from_hand(player_to_play, which_card_to_play);
+                    player_to_play_board->lane2_card = player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top];
+                    player_to_play_board->lane2 = 1;
+                    --player_to_play->player_hand.hand_top;
+                } else {
+                    printf("No mana to summon the card");
+                }
+            } else if (player_to_play_board->lane3 == 0) {
+                save_current_mana = player_to_play->player_mana.current_mana;
+                if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {
+                    player_to_play->player_mana.current_mana = save_current_mana;
+                    play_card_from_hand(player_to_play, which_card_to_play);
+                    player_to_play_board->lane3_card = player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top];
+                    player_to_play_board->lane3 = 1;
+                    --player_to_play->player_hand.hand_top;
+                } else {
+                    printf("No mana to summon the card");
+                }
+            } else if (player_to_play_board->lane4 == 0) {
+                save_current_mana = player_to_play->player_mana.current_mana;
+                if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {
+                    player_to_play->player_mana.current_mana = save_current_mana;
+                    play_card_from_hand(player_to_play, which_card_to_play);
+                    player_to_play_board->lane4_card = player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top];
+                    player_to_play_board->lane4 = 1;
+                    --player_to_play->player_hand.hand_top;
+                } else {
+                    printf("No mana to summon the card");
+                }
+            } else if (player_to_play_board->lane5 == 0) {
+                save_current_mana = player_to_play->player_mana.current_mana;
+                if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {
+                    player_to_play->player_mana.current_mana = save_current_mana;
+                    play_card_from_hand(player_to_play, which_card_to_play);
+                    player_to_play_board->lane5_card = player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top];
+                    player_to_play_board->lane5 = 1;
+                    --player_to_play->player_hand.hand_top;
+                } else {
+                    printf("No mana to summon the card");
+                }
+            }
+            printf("\n");
+            break;
+            ;
+        
+            
     }
-
 }
-void play_card(card_t card_to_put, board_t *board, player_t *player, int card){
-    if(can_play_card(card_to_put, board, player, card )){
-        play_card_from_hand(player, card);
-    }
-    else{
-        printf("Not enough mana to play the card");
-    }
-}
- */
