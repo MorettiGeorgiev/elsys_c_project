@@ -13,14 +13,6 @@ void push_card(card_t card_to_push, struct deck_t *player_deck) {
         player_deck->deck[++player_deck->top] = card_to_push;
     }
 }
-//look at the next card that is in the deck
-void look_card(struct deck_t *player_deck) {
-    printf("-Next card:\ncard NAME: %s\ncard DAMAGE: %d\ncard HP: %d\ncard MANA: %d\n",
-            player_deck->deck[player_deck->top].card_name,
-            player_deck->deck[player_deck->top].card_damage,
-            player_deck->deck[player_deck->top].card_hp,
-            player_deck->deck[player_deck->top].card_mana);
-}
 //print the cards in the deck
 /*
 void print_deck(struct deck_t player_deck) {
@@ -55,8 +47,13 @@ void draw_card(card_t card_to_push_hand, struct hand_t *player_hand, struct deck
 void print_hand(struct hand_t *player_hand, struct deck_t *player_deck) {
     int i;
     for (i = player_hand->hand_top; i >= 0; i--) {
+        if(player_hand->hand_cards[i].special_index == 0){
         printf("%s %d,%d,%d | ",player_hand->hand_cards[i].card_name, player_hand->hand_cards[i].card_damage,
                 player_hand->hand_cards[i].card_hp, player_hand->hand_cards[i].card_mana);
+        }else{
+            printf("SPECIAL | ");
+        }
+        
     }
     printf("\n");
 }

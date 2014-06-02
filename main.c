@@ -30,9 +30,9 @@ int main() {
     card_t attacker5 = {"Purple", 5, 8, 4};
     card_t attacker6 = {"Black", 2, 10, 2};
     card_t attacker7 = {"Brown", 3, 6, 1};
-    card_t attacker8 = {"Gray", 5, 5, 3};
-    card_t attacker9 = {"Orange", 6, 3, 4};
-    card_t attacker10 = {"Lime", 4, 2, 7};
+    card_t attacker8 = {"Gray", 5, 5, 2};
+    card_t attacker9 = {"Orange", 6, 3, 3};
+    card_t attacker10 = {"Lime", 4, 2, 1};
     //Creating first player deck END
     //push cards START
     push_card(attacker1, &player1.player_deck);
@@ -59,11 +59,11 @@ int main() {
     card_t defender3 = {"Dark_Yellow", 3, 5, 5};
     card_t defender4 = {"Dark_Red", 5, 6, 7};
     card_t defender5 = {"Dark_Purple", 3, 3, 4};
-    card_t defender6 = {"Dark_Black", 8, 1, 2};
+    card_t defender6 = {"Dark_Black", 8, 1, 1};
     card_t defender7 = {"Dark_Brown", 2, 2, 1};
-    card_t defender8 = {"Dark_Gray", 8, 1, 3};
-    card_t defender9 = {"Dark_Orange", 5, 3, 4};
-    card_t defender10 = {"Dark_Lime", 3, 2, 6};
+    card_t defender8 = {"Dark_Gray", 8, 1, 1};
+    card_t defender9 = {"Dark_Orange", 5, 3, 2};
+    card_t defender10 = {"Dark_Lime", 3, 2, 0, 1};
     //Creating second player deck END
     //Push cards START
     push_card(defender1, &player2.player_deck);

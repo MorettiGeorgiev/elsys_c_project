@@ -5,7 +5,7 @@
 void change_hp(player_t *player, int hp, int controller) {
     if (controller == 1) {
         player->player_hp += hp;
-    } else {
+    } else if(controller = 2) {
         player->player_hp -= hp;
     }
 }
