@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "board.h"
-
+//function to initialized
 void init_board(board_t *board) {
     board->lane1 = 0;
     board->lane2 = 0;
@@ -8,7 +8,7 @@ void init_board(board_t *board) {
     board->lane4 = 0;
     board->lane5 = 0;
 }
-
+//fuunction to print card
 void play_card(card_t *card_to_play) {
     if(card_to_play->special_index == 0){
     printf("%d | %d",
@@ -19,7 +19,7 @@ void play_card(card_t *card_to_play) {
         printf("SPECIAL");
     }
 }
-
+//function to print player
 void print_player(player_t *player, int turn) {
     printf("PLAYER: %s(%dhp), MANA %d/10, turn %d\n",
             player->player_name,
@@ -27,13 +27,15 @@ void print_player(player_t *player, int turn) {
             player->player_mana.current_mana,
             turn);
 }
-
+//function to print the board
 void print_board(board_t *board, player_t *player, int player_id, int turn) {
+    //print this if player1
     if (player_id == 1) {
         print_player(player, turn);
         print_hand(&player->player_hand, &player->player_deck);
         printf("\n");
     }
+    //print the middle of the board
     printf("# ");
     if (board->lane1 == 0) {
         printf("   ");
@@ -65,6 +67,7 @@ void print_board(board_t *board, player_t *player, int player_id, int turn) {
         play_card(&board->lane5_card);
     }
     printf(" #\n\n");
+    //print this if player2
     if (player_id == 2) {
 
         print_hand(&player->player_hand, &player->player_deck);
@@ -86,8 +89,6 @@ void play(board_t *player_to_play_board, board_t *other_player_board, player_t *
     int save_current_mana;
     int attack_result;
     
-    //print_board(player_to_play_board, player_to_play, 1, turn);
-    //print_board(other_player_board, other_player, 2, turn);
     printf("\nWhat do you want to do?\n");
     printf("1: Play card\n");
     printf("2: Attack\n");
@@ -98,6 +99,17 @@ void play(board_t *player_to_play_board, board_t *other_player_board, player_t *
         case 1:
             printf("Chose a card: ");
             scanf("%d", &which_card_to_play);
+            if(which_card_to_play > player_to_play->player_hand.hand_top){
+                while(1){
+                    printf("You don't have this card in your hand\n");
+                    printf("Chose a card: ");
+                    scanf("%d", &which_card_to_play);
+                    
+                    if(which_card_to_play <= player_to_play->player_hand.hand_top){
+                        break;
+                    }
+                }
+            }
             if (player_to_play_board->lane1 == 0) {
                 save_current_mana = player_to_play->player_mana.current_mana;
                 if (can_put_card(player_to_play->player_hand.hand_cards[player_to_play->player_hand.hand_top], &player_to_play->player_mana)) {

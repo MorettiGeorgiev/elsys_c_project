@@ -16,9 +16,9 @@ struct deck_t {
 };
 void init_deck(struct deck_t *player_deck);
 void push_card(card_t card_to_push, struct deck_t *player_deck);
-void look_card(struct deck_t *player_deck);
 void print_deck(struct deck_t player_deck);
 void init_hand_cards(struct hand_t *player_hand);
 void draw_card(card_t card_to_push_hand, struct hand_t *player_hand, struct deck_t *player_deck, int modifier);
 void print_hand(struct hand_t *player_hand, struct deck_t *player_deck);
+int load_deck(player_t *player, char *filename);
 #endif

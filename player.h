@@ -11,5 +11,6 @@ typedef struct {
     struct deck_t player_deck;
     struct hand_t player_hand;
 } player_t;
+void change_hp(player_t *player, int hp, int controller);
 void play_card_from_hand(player_t *player, int card);
 #endif	/* PLAYER_H */

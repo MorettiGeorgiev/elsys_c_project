@@ -3,7 +3,7 @@
         
 	typedef struct{
                 
-		char *card_name;
+		char card_name[30];
 		int card_damage;
 		int card_hp;
 		int card_mana;

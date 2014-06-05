@@ -1,20 +1,21 @@
-
 #include<stdio.h>
+#include <string.h>
 #include "deck.h"
 #include "manapool.h"
+#include "player.h"
 //Init deck
 void init_deck(struct deck_t *player_deck) {
     player_deck->top = -1;
 }
-//Push a card to the top of the deck
+//Push a card to the top of the deck | this function is NOT used
 void push_card(card_t card_to_push, struct deck_t *player_deck) {
     int top_element_deck = player_deck->top;
     if (top_element_deck != DECK_SIZE - 1) {
         player_deck->deck[++player_deck->top] = card_to_push;
     }
 }
-//print the cards in the deck
-/*
+//print the cards in the deck | this function is NOT used
+
 void print_deck(struct deck_t player_deck) {
     int i;
     for (i = 0; i <= player_deck.top; i++) {
@@ -22,11 +23,11 @@ void print_deck(struct deck_t player_deck) {
                 player_deck.deck[i].card_hp, player_deck.deck[i].card_mana);
     }
 }
-*/
+
 //CARDS IN YOUR HAND
 //Init cards
 void init_hand_cards(struct hand_t *player_hand) {
-    player_hand->hand_top = -1;
+    player_hand->hand_top = -1  ;
 }
 //Draw card from the top of the deck to your hand
 void draw_card(card_t card_to_push_hand, struct hand_t *player_hand, struct deck_t *player_deck, int modifier) {
@@ -56,4 +57,26 @@ void print_hand(struct hand_t *player_hand, struct deck_t *player_deck) {
         
     }
     printf("\n");
+}
+//function to load the deck from file
+int load_deck(player_t *player, char *filename){
+    FILE *fp = fopen(filename, "r");
+  char str[2000];
+  char *token;
+  if(fp == NULL){ return 0;}
+  while(fgets(str, 2000, fp)){
+      ++player->player_deck.top;
+      token = strtok(str, ",");
+      sscanf(token, "%s", player->player_deck.deck[player->player_deck.top].card_name);
+      token = strtok(NULL, ",");
+      sscanf(token, "%d", &player->player_deck.deck[player->player_deck.top].card_damage);
+      token = strtok(NULL, ",");
+      sscanf(token, "%d", &player->player_deck.deck[player->player_deck.top].card_hp);
+      token = strtok(NULL, ",");
+      sscanf(token, "%d", &player->player_deck.deck[player->player_deck.top].card_mana);
+      token = strtok(NULL, ",");
+      sscanf(token, "%d", &player->player_deck.deck[player->player_deck.top].special_index);
+  }
+  fclose(fp);
+  return 1;
 }
